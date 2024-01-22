@@ -18,7 +18,6 @@
 // Sets default values
 AFormation::AFormation()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 
 	StartingPoint = FVector::Zero();
 	StartingPoint2D = FVector2D::Zero();
@@ -166,11 +165,14 @@ void AFormation::DrawFormation()
 
 	DrawDebugLine(GetWorld(), StartingPoint - LineVector / 2, StartingPoint + LineVector / 2, FColor::White, false, -1, 0, 5);
 
+	// Array containing the different lines of the formation
 	TArray<FLine> Lines;
 	int CurrentLine = 0;
 
 	for (int i = 0; i < 3; i++) {
+		// The total with of the current line
 		int TotalWidth = 0;
+		// The maximum depth of the units in the current lines
 		int MaxDepth = 0;
 		for (auto& Unit : CategorizedUnits[static_cast<EUnitCategory>(i)])
 		{
@@ -186,6 +188,7 @@ void AFormation::DrawFormation()
 			}
 
 			Lines[CurrentLine].AddUnit(Unit);
+			// If the width of the current line is greater than the displayed white line then we create a new line
 			if (TotalWidth > Distance)
 			{
 				Lines[CurrentLine].SetSize(FVector2D(TotalWidth, MaxDepth));

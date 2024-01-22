@@ -10,13 +10,13 @@
 class UInputAction;
 class UInputMappingContext;
 
+// Class representing a formation on a selected army
 UCLASS()
 class TESTTASK_API AFormation : public APawn
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
 	AFormation();
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputMappingContext* DefaultMappingContext;
@@ -50,8 +50,7 @@ private:
 	FVector2D CurrentPoint2D;
 	bool bTriggered;
 
-	TArray<FUnit> Units, FrontUnits, RangedUnits, SiegeUnits;
-	//TMap<FUnit, TTuple<double, double>> UnitsPositions;
+	TArray<FUnit> Units;
 	TMap<EUnitCategory, TArray<FUnit>> CategorizedUnits;
 
 	/** Top down camera */
